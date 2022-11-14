@@ -4,4 +4,8 @@ const getAllEmployees = () => {
   return axios.get("/api/v1/employees");
 };
 
-export { getAllEmployees };
+const postAddNewEmployee = (employee) => {
+  return axios.post("/api/v1/employees", employee);
+};
+
+export { getAllEmployees, postAddNewEmployee };
