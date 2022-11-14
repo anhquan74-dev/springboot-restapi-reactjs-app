@@ -7,11 +7,8 @@ const ModalAddNew = ({ show, handleClose }) => {
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
 
-  console.log(firstName, lastName, emailId);
-
-  const handleAddNew = async () => {
+  const handleAddNewEmployee = async () => {
     const res = await postAddNewEmployee({ firstName, lastName, emailId });
-    console.log(res);
 
     if (res && res.id) {
       handleClose();
@@ -75,7 +72,7 @@ const ModalAddNew = ({ show, handleClose }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleAddNew}>
+          <Button variant="primary" onClick={handleAddNewEmployee}>
             Add new
           </Button>
         </Modal.Footer>

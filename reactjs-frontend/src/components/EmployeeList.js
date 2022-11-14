@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import { Table, Container, Button } from "react-bootstrap";
 import { getAllEmployees } from "../services/EmployeeService";
 import ModalAddNew from "./ModalAddNew";
+import ModalComfirmDelete from "./ModalComfirmDelete";
+import ModalEdit from "./ModalEdit";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState("");
   const [showModalAddNew, setShowModalAddNew] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalConfirmDelete, setShowModalConfirmDelete] = useState(false);
+  const [employeeEdit, setEmployeeEdit] = useState({});
+  const [employeeDelete, setEmployeeDelete] = useState({});
 
   useEffect(() => {
     getAllEmployees()
@@ -13,18 +19,31 @@ const EmployeeList = () => {
         setEmployees(res);
       })
       .catch((e) => console.log(e));
-  }, [showModalAddNew]);
+  }, [showModalAddNew, showModalEdit, showModalConfirmDelete]);
 
   const handleClose = () => {
     setShowModalAddNew(false);
+    setShowModalEdit(false);
+    setShowModalConfirmDelete(false);
   };
-  console.log(showModalAddNew);
+
   return (
     <>
       <ModalAddNew show={showModalAddNew} handleClose={handleClose} />
+      <ModalEdit
+        show={showModalEdit}
+        handleClose={handleClose}
+        employeeEdit={employeeEdit}
+      />
+      <ModalComfirmDelete
+        show={showModalConfirmDelete}
+        handleClose={handleClose}
+        employeeDelete={employeeDelete}
+      />
       <Container>
         <h1>Employee List</h1>
         <Button
+          className="my-3"
           variant="success"
           onClick={() => {
             setShowModalAddNew(true);
@@ -52,8 +71,25 @@ const EmployeeList = () => {
                     <td>{employee.lastName}</td>
                     <td>{employee.emailId}</td>
                     <td>
-                      <Button variant="warning">Edit</Button>
-                      <Button variant="danger">Delete</Button>
+                      <Button
+                      className="mx-3"
+                        variant="warning"
+                        onClick={() => {
+                          setEmployeeEdit(employee);
+                          setShowModalEdit(true);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        onClick={() => {
+                          setEmployeeDelete(employee);
+                          setShowModalConfirmDelete(true);
+                        }}
+                      >
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 );
