@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import sun.net.httpserver.HttpServerImpl;
+// import sun.net.httpserver.HttpServerImpl;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -53,9 +53,9 @@ public class EmployeeController {
         return ResponseEntity.ok(updateEmployee);
     }
 
-    //build delete employee REST API
+    // build delete employee REST API
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){
+    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
 

@@ -1,12 +1,12 @@
 import { Modal, Button } from "react-bootstrap";
-import { deleteEmployee } from "../services/EmployeeService";
+import { deleteEmployee, getEmployeeById } from "../services/EmployeeService";
 
 const ModalComfirmDelete = ({ show, handleClose, employeeDelete }) => {
-  const handleDeleteEmployee = () => {
-    deleteEmployee(employeeDelete.id)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
-    handleClose();
+  const handleDeleteEmployee = async () => {
+    const res = await deleteEmployee(employeeDelete.id);
+    if (res) {
+      handleClose();
+    }
   };
 
   return (
