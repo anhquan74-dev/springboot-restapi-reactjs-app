@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import { deleteEmployee, getEmployeeById } from "../services/EmployeeService";
+import { deleteEmployee } from "../services/EmployeeService";
 
 const ModalComfirmDelete = ({ show, handleClose, employeeDelete }) => {
   const handleDeleteEmployee = async () => {
